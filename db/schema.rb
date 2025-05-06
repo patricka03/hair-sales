@@ -10,9 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_06_084933) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_06_155119) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "hairs", force: :cascade do |t|
+    t.decimal "price", precision: 8, scale: 2
+    t.integer "length"
+    t.string "texture"
+    t.string "origin"
+    t.integer "quantity", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "admin_id"
+    t.index ["admin_id"], name: "index_hairs_on_admin_id"
+    t.index ["origin"], name: "index_hairs_on_origin"
+    t.index ["texture"], name: "index_hairs_on_texture"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "hair_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hair_id"], name: "index_orders_on_hair_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +45,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_06_084933) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "phone_number"
+    t.string "address"
+    t.date "date_of_birth"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "hairs", "users", column: "admin_id"
+  add_foreign_key "orders", "hairs"
+  add_foreign_key "orders", "users"
 end
