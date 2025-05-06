@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :order
   has_many :hairs, through: :order
+
+  def admin
+    self.admin
+  end
 end

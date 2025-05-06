@@ -1,9 +1,12 @@
-<h1>Test</h1>
-<ul>
-  <% @hairs.each do |hair| %>
-    <li>Price: £<%= hair.price %></li>
-    <li>Length of Hair: <%= hair.length%></li>
-    <li>Hair Testure: <%= hair.texture%></li>
-    <li>Hair Origin: <%= hair.origin%></li>
-  <% end %>
-</ul>
+<h1>Available Hair Products</h1>
+<% @hairs.each do |hair| %>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Hair Details</h5>
+      <p class="card-text">Price: £<%= hair.price %></p>
+      <p class="card-text">Length: <%= hair.length %> inches</p>
+      <p class="card-text">Texture: <%= hair.texture %></p>
+      <p class="card-text">Origin: <%= hair.origin %></p>
+    </div>
+  </div>
+<% end %>
