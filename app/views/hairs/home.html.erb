@@ -1,0 +1,9 @@
+<h1>Test</h1>
+<ul>
+  <% @hairs.each do |hair| %>
+    <li>Price: £<%= hair.price %></li>
+    <li>Length of Hair: <%= hair.length%></li>
+    <li>Hair Testure: <%= hair.texture%></li>
+    <li>Hair Origin: <%= hair.origin%></li>
+  <% end %>
+</ul>

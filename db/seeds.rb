@@ -19,6 +19,7 @@ admin_user.save!
 p 'Creating hair'
 
 admin_hair = Hair.create!(
+  name: "testhair",
   price: 180,
   length: 14,
   texture: "Straight",
