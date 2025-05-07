@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :order
   has_many :hairs, through: :order
 
-  def admin
+  def admin?
     self.admin
   end
 end

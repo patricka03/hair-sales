@@ -1,0 +1,20 @@
+<div class="row">
+  <h1><%= @hair.name %></h1>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Hair Details</h5>
+        <p class="card-text">Price: £<%= @hair.price %></p>
+        <p class="card-text">Length: <%= @hair.length %> inches</p>
+        <p class="card-text">Texture: <%= @hair.texture %></p>
+        <p class="card-text">Origin: <%= @hair.origin %></p>
+      </div>
+    </div>
+</div>
+<div>
+  <h2>Order your hair</h2>
+  <%= simple_form_for [@hair, @order] do |f| %>
+    <%= f.hidden_field :hair_id, value: @hair.id %>
+    <%= f.input :quantity, collection: (1..100).to_a, prompt: "How many?" %>
+    <%= f.submit "Place your order", class: "btn btn-primary" %>
+  <%  end %>
+</div>

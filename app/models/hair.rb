@@ -1,5 +1,5 @@
 class Hair < ApplicationRecord
-  has_many :orders
+  has_many :orders, dependent: :destroy
   has_many :users, through: :orders
   belongs_to :admin, class_name: "User", optional: true
   has_one_attached :photo

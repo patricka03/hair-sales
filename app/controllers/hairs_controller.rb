@@ -1,13 +1,13 @@
 class HairsController < ApplicationController
-  before_action :authenticate_user!, only: [ :home, :show ]
-  before_action :authorize_admin, only: [ :new, :create ]
+  before_action :authenticate_user!, only: [ :new, :create ]
 
-  def home
+  def index
     @hairs = Hair.all
   end
 
   def show
     @hair = Hair.find(params[:id])
+    @order = Order.new
   end
 
   def new
@@ -15,19 +15,20 @@ class HairsController < ApplicationController
   end
 
   def create
-    @hair =Hair.new(hair_params)
-    if @hair.save
-      redirect_to hairs_path(@hair), notice: "Hair successfully created!"
+    if current_user.admin?
+    @hair = Hair.new(hair_params)
+    @hair.admin = current_user
+      if @hair.save
+        redirect_to hairs_path(@hair), notice: "Hair successfully created!"
+      else
+        render :new, status: :unprocessable_entity
+      end
     else
-      render :new, status: :unprocessable_entity
+      redirect_to hairs_path(@hair), notice: "You are not authorized to add hair."
     end
   end
 
   private
-
-  def authorize_admin
-    redirect_to root_path, alert: "You are not authorized to add hair." unless current_user.admin?
-  end
 
   def hair_params
     params.require(:hair).permit(:name, :price, :length, :texture, :origin, :quantity, :photo)

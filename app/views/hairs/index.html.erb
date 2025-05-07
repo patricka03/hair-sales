@@ -7,6 +7,7 @@
       <p class="card-text">Length: <%= hair.length %> inches</p>
       <p class="card-text">Texture: <%= hair.texture %></p>
       <p class="card-text">Origin: <%= hair.origin %></p>
+      <%= link_to hair.name, hair_path(hair) %>
     </div>
   </div>
 <% end %>
