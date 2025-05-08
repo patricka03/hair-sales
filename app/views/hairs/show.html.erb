@@ -18,3 +18,13 @@
     <%= f.submit "Place your order", class: "btn btn-primary" %>
   <%  end %>
 </div>
+<div>
+  <h2><strong>Reviews</strong></h2>
+  <ul class="list-group">
+    <% @hair.reviews.each do |review| %>
+      <li class="list-group-item"><%= review.content %></li>
+    <% end %>
+  </ul>
+  <%= link_to 'Leave a review', new_hair_review_path(@hair) %>
+  <br>
+</div>

@@ -27,7 +27,7 @@ admin_hair = Hair.new(
   length: 20,
   texture: "Loose Wave",
   origin: "Brazilian",
-  quantity: 5,
+  quantity: 100,
 )
 
 admin_hair.admin = admin_user

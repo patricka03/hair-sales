@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-
   before_action :authenticate_user!
 
   def create
@@ -36,7 +35,7 @@ class OrdersController < ApplicationController
           },
           unit_amount: (@order.price / @order.quantity * 100).to_i # Price per unit
         },
-        quantity: @order.quantity # User’s selected quantity
+        quantity: @order.quantity
       }],
       mode: "payment",
       success_url: "#{request.base_url}#{success_hair_order_path(@hair, @order)}",

@@ -10,6 +10,17 @@ Rails.application.routes.draw do
         get :cancel
       end
     end
+    resources :reviews, only: [:new, :create, :edit]
   end
   get "/dashboard", to: "pages#dashboard"
+
+  resources :carts, only: [:show] do
+    collection do
+      post :add
+      delete :remove
+      post :checkout
+      get :success
+      get :cancel
+    end
+  end
 end

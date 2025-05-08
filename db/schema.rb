@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_07_133149) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_08_131907) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,8 +64,20 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_07_133149) do
     t.datetime "updated_at", null: false
     t.integer "quantity"
     t.integer "price"
+    t.string "status", default: "pending"
+    t.string "order_status"
     t.index ["hair_id"], name: "index_orders_on_hair_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "content"
+    t.bigint "hair_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["hair_id"], name: "index_reviews_on_hair_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -91,4 +103,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_07_133149) do
   add_foreign_key "hairs", "users", column: "admin_id"
   add_foreign_key "orders", "hairs"
   add_foreign_key "orders", "users"
+  add_foreign_key "reviews", "hairs"
+  add_foreign_key "reviews", "users"
 end
