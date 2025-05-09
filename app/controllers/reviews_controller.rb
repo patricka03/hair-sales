@@ -11,6 +11,7 @@ class ReviewsController < ApplicationController
     @hair = Hair.find(params[:hair_id])
     @review = Review.new(review_params)
     @review.hair = @hair
+    @review.user = current_user
     if @review.save
       redirect_to hair_path(@hair), alert: "Your review has been successfully created."
     else
